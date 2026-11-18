@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piimask"
+dynamic = ["version"]
+description = "Mask UK personal data before sending text to an LLM, then restore it in the reply."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "piimask contributors"}]
+keywords = ["pii", "privacy", "llm", "redaction", "gdpr", "uk"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Security",
+  "Topic :: Text Processing",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.4", "build>=1"]
+
+[project.scripts]
+piimask = "piimask.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/chandan9502/piimask"
+
+[tool.setuptools.dynamic]
+version = {attr = "piimask.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
